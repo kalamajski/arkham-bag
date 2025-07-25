@@ -160,7 +160,8 @@ function Lottery({ tokensInBag, setTokensInBag, getRandomObject, handleBagClick 
     wasLongPress.current = false;
   }
   
-  function handlePressTimer() {
+  function handlePressTimer(event) {
+    event.preventDefault();
     timeoutRef.current = setTimeout(() => {
       handleLongPress();
     }, 1000);
