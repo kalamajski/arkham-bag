@@ -1,66 +1,168 @@
+/* =============================
+   Base Styles & Custom Properties
+============================= */
+:root {
+  --primary-purple: #A64D79;
+  --secondary-purple: #6A1E55;
+  --tertiary-purple: #3B1C32;
+  --dark-bg: #1A1A1D;
+
+  --token-size-mobile: 40px;
+  --token-size-tablet: 45px;
+  --token-size-desktop: 50px;
+
+  --drawn-token-size-mobile: 120px;
+  --drawn-token-size-tablet: 160px;
+  --drawn-token-size-desktop: 200px;
+
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Josefin Slab', sans-serif;
-  background-image: 'tomb.png';
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
-h2, h3, h4 {
+h1, h2, h3, h4 {
   font-weight: 700;
   color: white;
+  margin: 0 0 var(--spacing-md);
 }
 
+/* =============================
+   Typography
+============================= */
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.25rem; }
+h3, h4 {
+  line-height: 1.4;
+}
+h3 { font-size: 1.1rem; }
+h4 { font-size: 1rem; }
+
+/* =============================
+   Layout Components
+============================= */
 .App {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .Instructions {
-  background-color: #A64D79;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 5px;
+  background-color: var(--primary-purple);
+  padding: var(--spacing-md);
+  text-align: left;
+}
+.Instructions h1 { text-align: center; }
+.Instructions h3 { margin-bottom: var(--spacing-sm); }
+.Instructions h4 {
+  margin-bottom: 10px;
+  font-style: italic;
 }
 
 .AvailableTokens {
+  background-color: var(--secondary-purple);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  background-color: #6A1E55;
-  padding-bottom: 10px;
+}
+.AvailableTokens h2 {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease;
+  margin-bottom: var(--spacing-md);
+}
+
+.AvailableTokens h2:hover {
+  opacity: 0.8;
 }
 
 .TokensInBag {
+  background-color: var(--tertiary-purple);
+  padding: var(--spacing-md);
   text-align: center;
-  background-color: #3B1C32;
-  padding-bottom: 10px;
+  min-height: 120px;
 }
 
 .Lottery {
-  text-align: center;
-  justify-content: center;
+  background-color: var(--dark-bg);
+  display: grid;
+  grid-template-rows: 100px 180px 150px;
   align-items: center;
-  background-color: #1A1A1D;
-  height: 500px;
-  padding-top: 40px;
+  justify-items: center;
+  row-gap: var(--spacing-lg);
+  flex: 1;
+  min-height: 500px;
 }
 
+.extra-button {
+  margin-bottom: 10px;
+}
+
+/* =============================
+   Tokens Grid
+============================= */
+.tokenList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tokenList img {
+  width: var(--token-size-mobile);
+  height: var(--token-size-mobile);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tokenList img:hover {
+  transform: scale(1.1);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.tokenList img:active {
+  transform: scale(0.95);
+}
+
+/* =============================
+   Buttons
+============================= */
 .button {
-  border-radius: 30%;
-  margin-bottom: 100px;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
-  font-family: 'Josefin Slab';
-  font-size: 20px;
+  padding: 12px 24px;
+  font-family: 'Josefin Slab', sans-serif;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  text-decoration: none;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  min-width: 100px;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  min-width: 120px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-glass {
@@ -76,67 +178,277 @@ h2, h3, h4 {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
-.hidden {
-  cursor: not-allowed; /* Indicate it's not clickable */
-  opacity: 0.1; /* Slightly transparent */
-  pointer-events: none; /* Prevent any interaction */
+.button-glass:active {
+  transform: translateY(0);
 }
 
+.Instructions .button {
+  padding: 4px 8px;
+}
+
+.hidden {
+  cursor: not-allowed;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* =============================
+   Drawn Token
+============================= */
 .drawnToken {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.tokenList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.drawnTokenWrapper {
+  position: relative;
+  width: var(--drawn-token-size-mobile);
+  height: var(--drawn-token-size-mobile);
 }
 
+.drawnTokenWrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 24px rgba(217, 209, 209, 0.4);
+}
+
+.overlayText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6),
+  0 4px 8px rgba(0, 0, 0, 0.4),
+  0 0 2px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+/* =============================
+   Animations
+============================= */
 .animate {
   animation: scaleIn 2s ease-out;
 }
 
 @keyframes scaleIn {
-  0% {
-    transform: scale(0) rotate(0deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2) rotate(360deg);
-    opacity: 0.2;
-  }
-  100% {
-    transform: scale(1) rotate(720deg);
-    opacity: 1;
-  }
+  0%   { transform: scale(0) rotate(0deg); opacity: 0; }
+  50%  { transform: scale(1.2) rotate(360deg); opacity: 0.2; }
+  100% { transform: scale(1) rotate(720deg); opacity: 1; }
 }
 
 .moving-gradient {
-  background: linear-gradient(
-    270deg,
-    #8a2a2a,
-    #153836,
-    #0b4451,
-    #3a5046,
-    #755d0d,
-    #39091a
-  );
+  background: linear-gradient(270deg, #8a2a2a, #153836, #0b4451, #3a5046, #755d0d, #39091a);
   background-size: 400% 400%;
-  min-height: 200px;
-  padding: 40px;
   animation: gradientMove 100s ease infinite;
 }
 
 @keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =============================
+   Alert Overlay
+============================= */
+.alert-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(104, 72, 72, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.alert-box {
+  background: rgb(201, 177, 177);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 0.5s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+  to {
+    opacity: 1;
   }
-  50% {
-    background-position: 100% 50%;
+}
+
+/* =============================
+   Responsive Breakpoints
+============================= */
+
+/* Tablet */
+@media (min-width: 768px) {
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  h4 { font-size: 1.1rem; }
+
+  .Instructions,
+  .AvailableTokens,
+  .TokensInBag {
+    padding: var(--spacing-lg);
   }
-  100% {
-    background-position: 0% 50%;
+
+  .tokenList,
+  .TokensInBag .tokenList {
+    grid-template-columns: repeat(auto-fit, minmax(var(--token-size-tablet), 1fr));
+    max-width: 450px;
+    gap: var(--spacing-md);
+  }
+
+  .tokenList img {
+    width: var(--token-size-tablet);
+    height: var(--token-size-tablet);
+  }
+
+  .drawnToken img {
+    width: var(--drawn-token-size-tablet);
+    height: var(--drawn-token-size-tablet);
+    margin-bottom: 40px;
+  }
+
+  .button {
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    min-width: 120px;
+  }
+
+  .Lottery {
+    grid-template-rows: 100px 200px 160px;
+    min-height: 500px;
+  }
+
+  .Lottery .tokenList {
+    margin-top: 20px;
+  }
+}
+  .drawnTokenWrapper {
+   width: var(--drawn-token-size-tablet);
+   height: var(--drawn-token-size-tablet);
+}
+
+.extra-button {
+  margin-bottom: 0px;
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .App {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.4rem; }
+
+  .Instructions,
+  .AvailableTokens,
+  .TokensInBag {
+    padding: var(--spacing-xl);
+  }
+
+  .tokenList,
+  .TokensInBag .tokenList {
+    grid-template-columns: repeat(auto-fit, minmax(var(--token-size-desktop), 1fr));
+    max-width: 600px;
+    gap: var(--spacing-md);
+  }
+
+  .tokenList img {
+    width: var(--token-size-desktop);
+    height: var(--token-size-desktop);
+  }
+
+  .drawnToken img {
+    width: var(--drawn-token-size-desktop);
+    height: var(--drawn-token-size-desktop);
+  }
+
+  .Lottery {
+    grid-template-rows: 120px 200px 180px;
+    min-height: 540px;
+  }
+
+  .button {
+    font-size: 1.25rem;
+    padding: 16px 36px;
+  }
+
+  .drawnTokenWrapper {
+    width: var(--drawn-token-size-desktop);
+    height: var(--drawn-token-size-desktop);
+  }
+
+  .extra-button {
+    margin-bottom: 0px;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .tokenList,
+  .TokensInBag .tokenList {
+    max-width: 800px;
+  }
+}
+
+/* Landscape Phone */
+@media (max-height: 600px) and (orientation: landscape) {
+  .Lottery {
+    min-height: 200px;
+    padding: var(--spacing-md);
+    grid-template-rows: 60px 100px 40px;
+  }
+
+  .drawnToken img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .Instructions h3,
+  .Instructions h4 {
+    font-size: 0.9rem;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .button-glass {
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: 2px solid white;
+  }
+
+  .tokenList img:hover {
+    box-shadow: 0 0 0 3px white;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate,
+  .moving-gradient {
+    animation: none;
+  }
+
+  .moving-gradient {
+    background: var(--dark-bg);
+  }
+
+  .tokenList img,
+  .button {
+    transition: none;
   }
 }
