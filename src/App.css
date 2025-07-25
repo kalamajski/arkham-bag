@@ -107,9 +107,6 @@ h4 { font-size: 1rem; }
   min-height: 500px;
 }
 
-.extra-button {
-  margin-bottom: 20px;
-}
 
 /* =============================
    Tokens Grid
@@ -163,6 +160,11 @@ h4 { font-size: 1rem; }
   overflow: hidden;
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none; 
 }
 
 .button-glass {

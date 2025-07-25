@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <div className="App">
-     <Instructions tokensInBag={tokensInBag} setTokensInBag={setTokensInBag}/>
+     <Instructions availableTokens={availableTokens} setAvailableTokens={setAvailableTokens} tokensInBag={tokensInBag} setTokensInBag={setTokensInBag}/>
      <AvailableTokens availableTokens={availableTokens} handleTokenClick={handleTokenClick} />
      <BagContent tokensInBag={tokensInBag} handleBagClick={handleBagClick} />
      <Lottery handleBagClick={handleBagClick} tokensInBag={tokensInBag} setTokensInBag={setTokensInBag} getRandomObject={getRandomObject} />
@@ -40,7 +40,7 @@ export default function App() {
   );
 }
 
-function Instructions({ tokensInBag, setTokensInBag }) {
+function Instructions({ availableTokens, setAvailableTokens, tokensInBag, setTokensInBag }) {
   const [showAlert, setShowAlert] = useState(false);
   const [storageMessage, setStorageMessage] = useState("NADA");
 
@@ -59,7 +59,10 @@ function Instructions({ tokensInBag, setTokensInBag }) {
     const storedArray = localStorage.getItem('chaosArray');
     if (storedArray) {
       try {
-        setTokensInBag(JSON.parse(storedArray));
+        const parsedTokens = JSON.parse(storedArray);
+        setTokensInBag(parsedTokens);
+        setAvailableTokens(previous => previous.filter(item =>
+          !parsedTokens.some(removeItem => removeItem.id === item.id)));
         setStorageMessage("Your Chaos Bag was loaded successfully!");
       } catch (error) {
         setStorageMessage("Failed to fetch the bag array!");
@@ -220,7 +223,7 @@ function Lottery({ tokensInBag, setTokensInBag, getRandomObject, handleBagClick 
       </div>
       </div>
       {(extraBag.length !== 0) && <div>
-      <button className="button button-glass extra-button" onClick={handleReturn}>Click here to return the tokens to the bag</button>
+      <button className="button button-glass" onClick={handleReturn}>Click here to return the tokens to the bag</button>
       <div className="tokenList">
       {extraBag.map((token) => (
     <img key={token.id} src={token.imageURL} height={50} width={50} style={{marginTop: 10}} alt={token.id}/>
