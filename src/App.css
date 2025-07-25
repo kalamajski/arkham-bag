@@ -407,9 +407,9 @@ h4 { font-size: 1rem; }
 /* Landscape Phone */
 @media (max-height: 600px) and (orientation: landscape) {
   .Lottery {
-    min-height: 200px;
+    min-height: 500px;
     padding: var(--spacing-md);
-    grid-template-rows: 60px 100px 40px;
+    grid-template-rows: 100px 200px 150px;
   }
 
   .drawnToken img {

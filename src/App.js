@@ -223,7 +223,7 @@ function Lottery({ tokensInBag, setTokensInBag, getRandomObject, handleBagClick 
       <button className="button button-glass extra-button" onClick={handleReturn}>Click here to return the tokens to the bag</button>
       <div className="tokenList">
       {extraBag.map((token) => (
-    <img key={token.id} src={token.imageURL} height={50} width={50} alt={token.id}/>
+    <img key={token.id} src={token.imageURL} height={50} width={50} style={{marginTop: 10}} alt={token.id}/>
     ))
       }
       </div>
